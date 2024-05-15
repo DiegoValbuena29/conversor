@@ -17,10 +17,10 @@ public class Conversor {
 
         while (!exit) {
             try {
-                // Obtener los tipos de cambio de la API
+
                 JSONObject exchangeRates = getExchangeRates();
 
-                // Filtrar los tipos de cambio para las monedas especificadas
+
                 JSONObject filteredRates = new JSONObject();
                 filteredRates.put("USD", exchangeRates.getJSONObject("conversion_rates").getDouble("USD"));
                 filteredRates.put("ARS", exchangeRates.getJSONObject("conversion_rates").getDouble("ARS"));
@@ -29,7 +29,7 @@ public class Conversor {
                 filteredRates.put("CLP", exchangeRates.getJSONObject("conversion_rates").getDouble("CLP"));
                 filteredRates.put("COP", exchangeRates.getJSONObject("conversion_rates").getDouble("COP"));
 
-                // Mostrar el menú
+
                 System.out.println("=== Conversor de Monedas ===");
                 System.out.println("1. Convertir monedas");
                 System.out.println("2. Salir");
@@ -38,7 +38,7 @@ public class Conversor {
 
                 switch (choice) {
                     case 1:
-                        // Obtener la entrada del usuario para la conversión
+
                         System.out.print("Introduce la moneda de origen (USD, ARS, BOB, BRL, CLP, COP): ");
                         String fromCurrency = scanner.next().toUpperCase();
                         System.out.print("Introduce la moneda de destino (USD, ARS, BOB, BRL, CLP, COP): ");
@@ -46,7 +46,7 @@ public class Conversor {
                         System.out.print("Introduce la cantidad a convertir: ");
                         double amount = scanner.nextDouble();
 
-                        // Realizar la conversión
+
                         double convertedAmount = Conversor(filteredRates, fromCurrency, toCurrency, amount);
                         System.out.println(amount + " " + fromCurrency + " equivale a " + convertedAmount + " " + toCurrency);
                         break;
@@ -70,7 +70,7 @@ public class Conversor {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // Verificar el código de estado de la respuesta
+
         if (response.statusCode() == 200) {
             String jsonString = response.body();
             return new JSONObject(jsonString);
