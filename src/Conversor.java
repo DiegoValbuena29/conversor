@@ -12,15 +12,14 @@ public class Conversor {
 
     public static void main(String[] args) {
         try {
-            // Obtener los tipos de cambio de la API
+
             JSONObject exchangeRates = getExchangeRates();
 
-            // Mostrar los tipos de cambio disponibles
+
             System.out.println("Tipos de cambio disponibles:");
             System.out.println(exchangeRates.getJSONObject("conversion_rates").toString());
 
-            // Aquí puedes continuar con el código para realizar la conversión de moneda
-            // ...
+
         } catch (IOException | InterruptedException | URISyntaxException e) {
             System.out.println("Error al conectar con la API: " + e.getMessage());
         }
@@ -32,7 +31,7 @@ public class Conversor {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // Verificar el código de estado de la respuesta
+
         if (response.statusCode() == 200) {
             String jsonString = response.body();
             return new JSONObject(jsonString);
